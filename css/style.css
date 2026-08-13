@@ -1,25 +1,29 @@
-/* =========================================================
-   Seiryu — design tokens
-   Ink navy background sections, azure-teal accent (the dragon),
-   warm scale-gold for highlights, mist for light panels.
-   ========================================================= */
 :root {
   --ink: #0E1A22;
   --azure: #1F8FA3;
   --azure-deep: #145E6B;
+  --azure-light: #A8D5E2;
   --gold: #C79A3C;
+  --gold-light: #E8D4B8;
   --mist: #F4F8F7;
   --mist-dim: #E7EFED;
   --slate: #24313A;
   --slate-soft: #5B6B72;
   --hairline: #D8E2E0;
   --white: #FFFFFF;
+  --error: #D64545;
+  --success: #4CAF50;
 
   --font-display: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
   --font-body: "Inter", "Helvetica Neue", Arial, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 
   --max-width: 1180px;
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 20px;
+  --spacing-lg: 32px;
+  --spacing-xl: 52px;
 }
 
 * { box-sizing: border-box; }
@@ -36,37 +40,44 @@ body {
 
 a { color: inherit; text-decoration: none; }
 ul { list-style: none; margin: 0; padding: 0; }
-button { font: inherit; }
+button { font: inherit; border: none; cursor: pointer; }
+h1, h2, h3, h4, h5, h6 { margin: 0; font-family: var(--font-display); }
 
 /* =========================================================
-   Header — wordmark centered above a nav row, like the reference
+   Header
    ========================================================= */
 .site-header {
-  padding-top: 20px;
+  position: sticky;
+  top: 0;
+  background: var(--white);
+  z-index: 100;
+  border-bottom: 1px solid var(--hairline);
 }
 
 .wordmark-row {
   display: flex;
   justify-content: center;
-  padding: 4px 24px 18px;
+  padding: var(--spacing-md) var(--spacing-md) var(--spacing-sm);
 }
 
 .wordmark {
   display: flex;
   align-items: center;
   gap: 10px;
+  transition: opacity 0.2s ease;
 }
 
+.wordmark:hover { opacity: 0.8; }
+
 .wordmark__mark {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   color: var(--azure-deep);
 }
 
 .wordmark__text {
-  font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   letter-spacing: 0.01em;
   color: var(--ink);
 }
@@ -74,6 +85,7 @@ button { font: inherit; }
 .primary-nav {
   max-width: var(--max-width);
   margin: 0 auto;
+  padding: 0 var(--spacing-md);
 }
 
 .primary-nav ul {
@@ -99,10 +111,9 @@ button { font: inherit; }
 
 .primary-nav a {
   display: block;
-  padding: 12px 26px;
-  font-family: var(--font-display);
+  padding: var(--spacing-sm) var(--spacing-md);
   font-weight: 600;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   color: var(--slate);
   transition: color 0.15s ease;
 }
@@ -112,7 +123,6 @@ button { font: inherit; }
   color: var(--azure-deep);
 }
 
-/* thin dragon-scale rule under the nav, the site's recurring motif */
 .scale-rule {
   height: 6px;
   background-image: radial-gradient(circle at 50% -40%, var(--azure) 0 5px, transparent 5px);
@@ -123,8 +133,7 @@ button { font: inherit; }
 }
 
 /* =========================================================
-   Hero — full-bleed media with an overlapping feature card,
-   card anchored upper-right exactly like the reference
+   Hero
    ========================================================= */
 .hero {
   position: relative;
@@ -165,26 +174,25 @@ button { font: inherit; }
 
 .feature-card {
   position: absolute;
-  top: 32px;
-  right: 32px;
-  width: min(380px, 86vw);
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  width: min(380px, 90vw);
   background: var(--white);
-  padding: 28px 26px 22px;
+  padding: var(--spacing-lg) var(--spacing-md);
   box-shadow: 0 18px 40px rgba(14, 26, 34, 0.18);
   border-top: 3px solid var(--azure);
 }
 
 .feature-card__title {
-  margin: 0 0 16px;
-  font-family: var(--font-display);
-  font-size: 1.15rem;
+  margin: 0 0 var(--spacing-md);
+  font-size: 1.2rem;
   color: var(--ink);
 }
 
 .feature-card__list li {
   display: flex;
-  gap: 12px;
-  padding: 12px 0;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) 0;
   border-top: 1px dashed var(--hairline);
 }
 
@@ -203,7 +211,6 @@ button { font: inherit; }
 
 .feature-card__list strong {
   display: block;
-  font-family: var(--font-display);
   font-size: 0.9rem;
   color: var(--ink);
 }
@@ -216,7 +223,7 @@ button { font: inherit; }
 }
 
 .feature-card__note {
-  margin: 14px 0 0;
+  margin: var(--spacing-sm) 0 0;
   text-align: right;
   font-family: var(--font-mono);
   font-size: 0.68rem;
@@ -224,33 +231,33 @@ button { font: inherit; }
 }
 
 /* =========================================================
-   About — heading, body copy, and a highlighted callout box
+   About
    ========================================================= */
 .about {
   max-width: 820px;
   margin: 0 auto;
-  padding: 64px 24px 40px;
+  padding: var(--spacing-xl) var(--spacing-md);
 }
 
 .about__heading {
-  font-family: var(--font-display);
   font-size: 1.7rem;
   color: var(--ink);
   border-left: 4px solid var(--azure);
-  padding-left: 14px;
-  margin: 0 0 22px;
+  padding-left: var(--spacing-md);
+  margin: 0 0 var(--spacing-md);
 }
 
 .about__body {
   font-size: 1rem;
   line-height: 1.75;
   color: var(--slate);
-  margin: 0 0 36px;
+  margin: 0 0 var(--spacing-lg);
 }
 
 .callout {
   background: var(--mist);
   border: 1px solid var(--mist-dim);
+  border-radius: 2px;
 }
 
 .callout__trigger {
@@ -258,16 +265,18 @@ button { font: inherit; }
   text-align: left;
   background: var(--azure-deep);
   color: var(--white);
-  border: none;
-  padding: 14px 20px;
-  font-family: var(--font-display);
+  padding: var(--spacing-md) var(--spacing-md);
   font-weight: 600;
   font-size: 0.95rem;
-  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.callout__trigger:hover {
+  background: var(--azure);
 }
 
 .callout__body {
-  padding: 20px 22px 22px;
+  padding: var(--spacing-md) var(--spacing-md);
 }
 
 .callout__body p {
@@ -282,32 +291,187 @@ button { font: inherit; }
 }
 
 /* =========================================================
+   Quick Links Grid
+   ========================================================= */
+.quick-links {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-md);
+  background: var(--mist);
+}
+
+.quick-links h2 {
+  font-size: 1.5rem;
+  color: var(--ink);
+  margin: 0 0 var(--spacing-lg);
+  text-align: center;
+}
+
+.quick-links__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.quick-link-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-lg) var(--spacing-md);
+  background: var(--white);
+  border: 1px solid var(--hairline);
+  text-align: center;
+  transition: all 0.2s ease;
+  border-radius: 2px;
+}
+
+.quick-link-card:hover {
+  border-color: var(--azure);
+  box-shadow: 0 8px 20px rgba(31, 143, 163, 0.12);
+}
+
+.quick-link-card--cta {
+  background: linear-gradient(135deg, var(--azure-deep) 0%, var(--azure) 100%);
+  color: var(--white);
+  border: none;
+}
+
+.quick-link-card--cta:hover {
+  box-shadow: 0 12px 28px rgba(20, 94, 107, 0.25);
+}
+
+.quick-link-card--cta h3,
+.quick-link-card--cta p {
+  color: var(--white);
+}
+
+.quick-link-card__icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: var(--spacing-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mist);
+  border-radius: 50%;
+  color: var(--azure-deep);
+}
+
+.quick-link-card--cta .quick-link-card__icon {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--white);
+}
+
+.quick-link-card__icon svg {
+  width: 24px;
+  height: 24px;
+  stroke-width: 1.8;
+}
+
+.quick-link-card h3 {
+  font-size: 1rem;
+  color: var(--ink);
+  margin: 0 0 var(--spacing-xs);
+}
+
+.quick-link-card--cta h3 {
+  color: var(--white);
+}
+
+.quick-link-card p {
+  font-size: 0.85rem;
+  color: var(--slate-soft);
+  margin: 0;
+}
+
+/* =========================================================
    Footer
    ========================================================= */
 .site-footer {
   max-width: var(--max-width);
-  margin: 40px auto 0;
-  padding: 0 24px 40px;
+  margin: var(--spacing-xl) auto 0;
+  padding: 0 var(--spacing-md) var(--spacing-lg);
+  border-top: 1px solid var(--hairline);
 }
 
 .scale-rule--footer {
-  margin-bottom: 18px;
+  margin-bottom: var(--spacing-md);
   opacity: 0.35;
 }
 
-.site-footer p {
-  margin: 0;
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.footer-col h4 {
+  font-size: 0.9rem;
+  color: var(--ink);
+  margin: 0 0 var(--spacing-sm);
+}
+
+.footer-col ul li {
+  margin-bottom: var(--spacing-xs);
+}
+
+.footer-col a {
+  font-size: 0.85rem;
+  color: var(--slate-soft);
+  transition: color 0.2s ease;
+}
+
+.footer-col a:hover {
+  color: var(--azure-deep);
+}
+
+.footer-tagline {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   color: var(--slate-soft);
+  margin: 0;
 }
 
 /* =========================================================
    Responsive
    ========================================================= */
-@media (max-width: 720px) {
-  .primary-nav a { padding: 10px 14px; font-size: 0.85rem; }
-  .hero__media { height: 46vh; min-height: 260px; }
-  .feature-card { position: static; margin: -40px 16px 0; width: auto; }
-  .about { padding-top: 40px; }
+@media (max-width: 900px) {
+  .primary-nav a { padding: var(--spacing-xs) var(--spacing-sm); font-size: 0.85rem; }
+  .feature-card { position: static; margin: -48px var(--spacing-md) 0; width: auto; }
+  .hero__media { height: 50vh; }
+  .quick-links__grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+}
+
+@media (max-width: 640px) {
+  :root { --spacing-md: 16px; --spacing-lg: 24px; --spacing-xl: 32px; }
+
+  .wordmark__text { font-size: 1.1rem; }
+  .wordmark__mark { width: 28px; height: 28px; }
+
+  .hero__media { height: 40vh; min-height: 240px; }
+
+  .feature-card { padding: var(--spacing-md) var(--spacing-sm); }
+  .feature-card__title { font-size: 1rem; }
+  .feature-card__list svg { width: 18px; height: 18px; }
+  .feature-card__list strong { font-size: 0.85rem; }
+  .feature-card__list span { font-size: 0.75rem; }
+
+  .about { padding: var(--spacing-lg) var(--spacing-md); }
+  .about__heading { font-size: 1.3rem; }
+  .about__body { font-size: 0.95rem; }
+
+  .quick-links { padding: var(--spacing-lg) var(--spacing-md); }
+  .quick-links h2 { font-size: 1.2rem; }
+  .quick-links__grid { grid-template-columns: 1fr; gap: var(--spacing-sm); }
+  .quick-link-card { padding: var(--spacing-md) var(--spacing-sm); }
+
+  .primary-nav li + li::before { height: 12px; }
+
+  .footer-content { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
